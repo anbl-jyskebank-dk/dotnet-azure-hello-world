@@ -18,9 +18,9 @@ public class DaprController : ControllerBase
 
     [Topic("cmd-pub-sub", "events", DeadLetterTopic = "failedMessages")]
     [HttpPost("hello-world")]
-    public ActionResult Dapr(CloudEvent<string> eventDto)
+    public ActionResult Dapr(CloudEvent cloudEvent)
     {
-        _logger.LogInformation(eventDto.Data);
+        _logger.LogInformation("WeatherForecast: {cloudEvent}", cloudEvent);
         return Ok();
     }
 
