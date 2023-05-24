@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Dapr;
+using Dapr.AspNetCore;
 
 namespace dotnet_azure_hello_world.Controllers;
 
@@ -16,10 +17,10 @@ public class DaprController : ControllerBase
     }
 
     [Topic("cmd-pub-sub", "events", DeadLetterTopic = "failedMessages")]
-    [HttpPost("dapr-hello-world")]
-    public async Task<ActionResult> Dapr(string eventDto)
+    [HttpPost("hello-world")]
+    public ActionResult Dapr(CloudEvent<string> eventDto)
     {
-        _logger.LogInformation(eventDto);
+        _logger.LogInformation(eventDto.Data);
         return Ok();
     }
 

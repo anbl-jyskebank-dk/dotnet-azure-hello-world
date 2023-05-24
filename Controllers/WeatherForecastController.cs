@@ -20,7 +20,7 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+    public async Task<IEnumerable<WeatherForecast>> Get()
     {
         _logger.LogInformation("WeatherForecast called");
         
@@ -34,7 +34,7 @@ public class WeatherForecastController : ControllerBase
             Summary = Summaries[Random.Shared.Next(Summaries.Length)]
         })
         .ToArray();
-        client.PublishEventAsync("cmd-pub-sub", "events", eventData);
+        await client.PublishEventAsync("cmd-pub-sub", "events", eventData);
         return eventData;
     }
 

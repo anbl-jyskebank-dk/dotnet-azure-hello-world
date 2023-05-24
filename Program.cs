@@ -29,5 +29,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+// needed for Dapr pub/sub routing
+app.MapSubscribeHandler();
 
 app.Run();
