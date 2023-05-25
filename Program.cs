@@ -18,6 +18,7 @@ builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 app.MapHealthChecks("/healthz");
+app.UseCloudEvents();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
